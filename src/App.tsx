@@ -7,11 +7,11 @@ import AlbumPage from './components/AlbumPage';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-900 text-white">
       <Router>
-        <header className="bg-blue-600 text-white p-4">
+        <header className="bg-gray-800 p-4 shadow-lg">
           <div className="container mx-auto">
-            <h1 className="text-2xl">JSONPlaceholder App</h1>
+            <h1 className="text-3xl font-bold">JSONPlaceholder App</h1>
           </div>
         </header>
         <main className="container mx-auto p-4">
@@ -21,7 +21,7 @@ const App: React.FC = () => {
             <Route path="/album/:id" element={<AlbumPage />} />
           </Routes>
         </main>
-        <footer className="bg-gray-800 text-white p-4 mt-4">
+        <footer className="bg-gray-800 p-4 mt-4 shadow-inner">
           <div className="container mx-auto text-center">
             <p>&copy; 2024 JSONPlaceholder App</p>
           </div>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
 
 interface User {
   id: number;
@@ -32,25 +31,21 @@ const fetchUsers = async (): Promise<User[]> => {
 };
 
 const UserListPage: React.FC = () => {
-  const { data: users, isLoading, isError } = useQuery<User[]>({
+  const { data: users, isLoading } = useQuery<User[]>({
     queryKey: ['users'],
-    queryFn: fetchUsers
+    queryFn: fetchUsers,
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error loading users. Please try again later.</div>;
+    return <div className="flex items-center justify-center h-screen text-white">Loading...</div>;
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">User List</h1>
+    <div className="container mx-auto p-4 text-white bg-gray-900 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">User List</h1>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-        <table className="min-w-full bg-white border rounded-lg shadow-md">
-          <thead className="bg-gray-100">
+        <table className="min-w-full bg-gray-800 border rounded-lg shadow-md">
+          <thead className="bg-gray-700">
             <tr>
               <th className="py-2 px-4 border">Username</th>
               <th className="py-2 px-4 border">Email</th>
@@ -62,13 +57,15 @@ const UserListPage: React.FC = () => {
           </thead>
           <tbody>
             {users?.map((user) => (
-              <tr key={user.id} className="hover:bg-gray-100 transition-colors">
+              <tr key={user.id} className="hover:bg-gray-700 transition-colors">
                 <td className="py-2 px-4 border">
-                  <Link to={`/user/${user.id}`} className="text-blue-500 hover:underline">{user.username}</Link>
+                  <Link to={`/user/${user.id}`} className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white py-1 px-3 rounded-full hover:shadow-lg transition-shadow duration-300">
+                    {user.username}
+                  </Link>
                 </td>
                 <td className="py-2 px-4 border">{user.email}</td>
                 <td className="py-2 px-4 border">
-                  <a href={`http://${user.website}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                  <a href={`http://${user.website}`} target="_blank" rel="noopener noreferrer" className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white py-1 px-3 rounded-full hover:shadow-lg transition-shadow duration-300">
                     {user.website}
                   </a>
                 </td>
