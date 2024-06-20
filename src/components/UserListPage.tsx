@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import {  Todo } from '../types/Todo';
+import { Album } from '../types/Album';
 
 interface User {
   id: number;
@@ -25,8 +27,8 @@ const fetchUsers = async (): Promise<User[]> => {
 
   return usersData.map((user: User) => ({
     ...user,
-    nbtodos: todosData.filter((todo: any) => todo.userId === user.id).length,
-    nbalbums: albumsData.filter((album: any) => album.userId === user.id).length,
+    nbtodos: todosData.filter((todo: Todo) => todo.userId === user.id).length,
+    nbalbums: albumsData.filter((album: Album) => album.userId === user.id).length,
   }));
 };
 
